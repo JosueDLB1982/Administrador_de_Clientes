@@ -8,10 +8,18 @@ const Formulario = () => {
                    .required('Debe Ingresar el Nombre Completo del Cliente')
                    .min(8, 'El nombre ingresado es muy corto. Por favor ingrese nombre completo.')
                    .max(40, 'El nombre ingresado es muy largo.'),
-        telefono: '',
-        email: '',
-        empresa: '',
-        notas: ''
+
+        telefono: Yup.number()
+                     .typeError('el número telefónico debe tener un formato válido')
+                     .integer('el número telefónico debe tener un formato válido')
+                     .positive('el número telefónico debe tener un formato válido'),
+
+        email: Yup.string()
+                  .required('debe ingresar el email de contacto del cliente')
+                  .email('por favor introduzca un email con un formato válido'),
+
+        empresa: Yup.string()
+                    .required('Debe Ingresar el nombre de la empresa a la que pertenece el cliente')
     })
 
     const handleSubmit = (val) => {
@@ -68,7 +76,7 @@ const Formulario = () => {
                                     htmlFor="telefono"
                                     className="text-gray-800 "
                                 >
-                                    telefono
+                                    Teléfono
                                 </label>
                                 <Field
                                     id="telefono"
@@ -77,6 +85,9 @@ const Formulario = () => {
                                     placeholder="Ingresa el Teléfono del Cliente"
                                     name="telefono"
                                 />
+                                {errors.telefono && touched.telefono ? (
+                                    <Alerta>{errors.telefono}</Alerta>
+                                ) : null}
                             </div>
 
                             <div className="mb-4">
@@ -93,6 +104,9 @@ const Formulario = () => {
                                     placeholder="Ingresa el email del Cliente"
                                     name="email"
                                 />
+                                {errors.email && touched.email ? (
+                                    <Alerta>{errors.email}</Alerta>
+                                ) : null}
                             </div>
 
                             <div className="mb-4">
@@ -109,6 +123,9 @@ const Formulario = () => {
                                     placeholder="Ingresa el Nombre de la Empresa del Cliente"
                                     name="empresa"
                                 />
+                                {errors.empresa && touched.empresa ? (
+                                    <Alerta>{errors.empresa}</Alerta>
+                                ) : null}
                             </div>
 
                             <div className="mb-4">
