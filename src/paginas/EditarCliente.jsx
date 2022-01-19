@@ -3,7 +3,7 @@
 const EditarCliente = () => {
     return (
         <div>
-            <h1>Desde EditarCliente.jsx</h1>
+            <h1>EditarCliente.jsx</h1>
 
         </div>
     )

@@ -3,7 +3,7 @@
 const NuevoCliente = () => {
     return (
         <div>
-            <h1>Desde NuevoCliente.jsx</h1>
+            <h1>NuevoCliente.jsx</h1>
 
         </div>
     )
