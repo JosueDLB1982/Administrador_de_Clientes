@@ -1,6 +1,19 @@
-import { Formik, Form, Field } from "formik"
+import { Formik, Form, Field, validateYupSchema } from "formik"
+import * as Yup from 'yup'
+import Alerta from "./Alerta"
 
 const Formulario = () => {
+    const nuevoClienteSchema = Yup.object().shape({
+        nombre: Yup.string()
+                   .required('Debe Ingresar el Nombre Completo del Cliente')
+                   .min(8, 'El nombre ingresado es muy corto. Por favor ingrese nombre completo.')
+                   .max(40, 'El nombre ingresado es muy largo.'),
+        telefono: '',
+        email: '',
+        empresa: '',
+        notas: ''
+    })
+
     const handleSubmit = (val) => {
         console.log(val)
     }
@@ -17,103 +30,112 @@ const Formulario = () => {
                     empresa: '',
                     notas: ''
                 }}
+
                 onSubmit={(values) => (
                     handleSubmit(values)
                 )}
+
+                validationSchema={nuevoClienteSchema}
             >
 
-                {() => (
-                    <Form
-                        className="mt-10"
-                    >
-                        <div className="mb-4">
-                            <label
-                                htmlFor="nombre"
-                                className="text-gray-800 "
-                            >
-                                Nombre
-                            </label>
-                            <Field
-                                id="nombre"
-                                type="text"
-                                className="mt-2 block w-full p-3 bg-gray-50"
-                                placeholder="Ingresa el Nombre Completo del Cliente"
-                                name="nombre"
-                            />
-                        </div>
+                {({ errors, touched }) => {
+                    return (
 
-                        <div className="mb-4">
-                            <label
-                                htmlFor="telefono"
-                                className="text-gray-800 "
-                            >
-                                telefono
-                            </label>
-                            <Field
-                                id="telefono"
-                                type="tel"
-                                className="mt-2 block w-full p-3 bg-gray-50"
-                                placeholder="Ingresa el Teléfono del Cliente"
-                                name="telefono"
-                            />
-                        </div>
+                        <Form
+                            className="mt-10"
+                        >
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="nombre"
+                                    className="text-gray-800 "
+                                >
+                                    Nombre
+                                </label>
+                                <Field
+                                    id="nombre"
+                                    type="text"
+                                    className="mt-2 block w-full p-3 bg-gray-50"
+                                    placeholder="Ingresa el Nombre Completo del Cliente"
+                                    name="nombre"
+                                />
+                                {errors.nombre && touched.nombre ? (
+                                    <Alerta>{errors.nombre}</Alerta>
+                                ) : null}
+                            </div>
 
-                        <div className="mb-4">
-                            <label
-                                htmlFor="email"
-                                className="text-gray-800 "
-                            >
-                                Email
-                            </label>
-                            <Field
-                                id="email"
-                                type="email"
-                                className="mt-2 block w-full p-3 bg-gray-50"
-                                placeholder="Ingresa el email del Cliente"
-                                name="email"
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="telefono"
+                                    className="text-gray-800 "
+                                >
+                                    telefono
+                                </label>
+                                <Field
+                                    id="telefono"
+                                    type="tel"
+                                    className="mt-2 block w-full p-3 bg-gray-50"
+                                    placeholder="Ingresa el Teléfono del Cliente"
+                                    name="telefono"
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <label
-                                htmlFor="empresa"
-                                className="text-gray-800 "
-                            >
-                                Empresa
-                            </label>
-                            <Field
-                                id="empresa"
-                                type="text"
-                                className="mt-2 block w-full p-3 bg-gray-50"
-                                placeholder="Ingresa el Nombre de la Empresa del Cliente"
-                                name="empresa"
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="email"
+                                    className="text-gray-800 "
+                                >
+                                    Email
+                                </label>
+                                <Field
+                                    id="email"
+                                    type="email"
+                                    className="mt-2 block w-full p-3 bg-gray-50"
+                                    placeholder="Ingresa el email del Cliente"
+                                    name="email"
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <label
-                                htmlFor="notas"
-                                className="text-gray-800 "
-                            >
-                                Notas
-                            </label>
-                            <Field
-                                id="notas"
-                                as="textarea"
-                                type="text"
-                                className="mt-2 block w-full p-3 bg-gray-50 h-40"
-                                placeholder="Aspectos a destacar del Nombre del Cliente"
-                                name="notas"
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="empresa"
+                                    className="text-gray-800 "
+                                >
+                                    Empresa
+                                </label>
+                                <Field
+                                    id="empresa"
+                                    type="text"
+                                    className="mt-2 block w-full p-3 bg-gray-50"
+                                    placeholder="Ingresa el Nombre de la Empresa del Cliente"
+                                    name="empresa"
+                                />
+                            </div>
 
-                        <input
-                            type="submit"
-                            value="Agregar Cliente"
-                            className="mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg rounded-md"
-                        />
-                    </Form>
-                )}
+                            <div className="mb-4">
+                                <label
+                                    htmlFor="notas"
+                                    className="text-gray-800 "
+                                >
+                                    Notas
+                                </label>
+                                <Field
+                                    id="notas"
+                                    as="textarea"
+                                    type="text"
+                                    className="mt-2 block w-full p-3 bg-gray-50 h-40"
+                                    placeholder="Aspectos a destacar del Nombre del Cliente"
+                                    name="notas"
+                                />
+                            </div>
+
+                            <input
+                                type="submit"
+                                value="Agregar Cliente"
+                                className="mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg rounded-md"
+                            />
+                        </Form>
+                    )
+                }}
             </Formik>
         </div>
     )
