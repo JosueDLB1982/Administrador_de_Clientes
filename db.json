@@ -1,3 +1,12 @@
 {
-    "clientes": []
+  "clientes": [
+    {
+      "nombre": "Josue Lopez",
+      "telefono": "56939091552",
+      "email": "josuedlopez1982@gmail.com",
+      "empresa": "Spartan DEV",
+      "notas": "Developer Treinee",
+      "id": 1
+    }
+  ]
 }

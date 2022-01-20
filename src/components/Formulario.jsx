@@ -6,24 +6,40 @@ const Formulario = () => {
     const phoneExpReg = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
     const nuevoClienteSchema = Yup.object().shape({
         nombre: Yup.string()
-                   .required('Debe Ingresar el Nombre Completo del Cliente')
-                   .min(8, 'El nombre ingresado es muy corto. Por favor ingrese nombre completo.')
-                   .max(40, 'El nombre ingresado es muy largo.'),
+            .required('Debe Ingresar el Nombre Completo del Cliente')
+            .min(8, 'El nombre ingresado es muy corto. Por favor ingrese nombre completo.')
+            .max(40, 'El nombre ingresado es muy largo.'),
 
         telefono: Yup.string()
-                     .typeError('el número telefónico debe tener un formato válido')
-                     .matches(phoneExpReg, 'el número telefónico debe tener un formato válido'),
+            .typeError('el número telefónico debe tener un formato válido')
+            .matches(phoneExpReg, 'el número telefónico debe tener un formato válido'),
 
         email: Yup.string()
-                  .required('debe ingresar el email de contacto del cliente')
-                  .email('por favor introduzca un email con un formato válido'),
+            .required('debe ingresar el email de contacto del cliente')
+            .email('por favor introduzca un email con un formato válido'),
 
         empresa: Yup.string()
-                    .required('Debe Ingresar el nombre de la empresa a la que pertenece el cliente')
+            .required('Debe Ingresar el nombre de la empresa a la que pertenece el cliente')
     })
 
-    const handleSubmit = (val) => {
-        console.log(val)
+    const handleSubmit = async (val) => { /* la llamada es async asincrona */
+        try {
+            const url = 'http://localhost:4000/clientes' /* Aquí se enviará la petición. Esta es la dirección y puerto escogidos para la Rest API */
+            const respuesta = await fetch(url, { /* Puesto que se hará un registro, envio de información, se pasan mas datos ademas de la url */
+                method: 'POST',  /* Hay que enviar los datos, se usa por eso el method post y se pasa el object con los datos, el object incluye */
+                body: JSON.stringify(val), /* el method post segun las reglas de Rest es para crear un registro. En body se guardará un object, este */
+                headers: { /* debe ser convertido a string con JSON.stringify. Por último, uno de los valores del object, es otro object, headers, */
+                    'Content-Type': 'application/json' /* ahí declaramos que el tipo de contenido es una app para JSON */
+                }
+            })
+
+            console.log(respuesta)
+            const resultado = await respuesta.json() /* pasamos el resultado a formato JSON */
+            console.log(resultado)
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
