@@ -3,16 +3,16 @@ import * as Yup from 'yup'
 import Alerta from "./Alerta"
 
 const Formulario = () => {
+    const phoneExpReg = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
     const nuevoClienteSchema = Yup.object().shape({
         nombre: Yup.string()
                    .required('Debe Ingresar el Nombre Completo del Cliente')
                    .min(8, 'El nombre ingresado es muy corto. Por favor ingrese nombre completo.')
                    .max(40, 'El nombre ingresado es muy largo.'),
 
-        telefono: Yup.number()
+        telefono: Yup.string()
                      .typeError('el número telefónico debe tener un formato válido')
-                     .integer('el número telefónico debe tener un formato válido')
-                     .positive('el número telefónico debe tener un formato válido'),
+                     .matches(phoneExpReg, 'el número telefónico debe tener un formato válido'),
 
         email: Yup.string()
                   .required('debe ingresar el email de contacto del cliente')
