@@ -1,9 +1,13 @@
 import { Formik, Form, Field, validateYupSchema } from "formik"
+import { useNavigate } from "react-router-dom"
 import * as Yup from 'yup'
 import Alerta from "./Alerta"
 
 const Formulario = () => {
+    const navigate = useNavigate() /* Función para redirigir a otra pagina */
+
     const phoneExpReg = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
+
     const nuevoClienteSchema = Yup.object().shape({
         nombre: Yup.string()
             .required('Debe Ingresar el Nombre Completo del Cliente')
@@ -36,10 +40,14 @@ const Formulario = () => {
             console.log(respuesta)
             const resultado = await respuesta.json() /* pasamos el resultado a formato JSON */
             console.log(resultado)
+            navigate('/clientes') /* A esta dirección queremos redirigir al usuario una vez que complete un registro */
 
         } catch (error) {
             console.log(error)
         }
+
+      
+       
     }
 
     return (
@@ -55,9 +63,11 @@ const Formulario = () => {
                     notas: ''
                 }}
 
-                onSubmit={(values) => (
-                    handleSubmit(values)
-                )}
+                onSubmit={ async (values, {resetForm}) => { /* Añadimos el async await para asegurarnos que se complete la petición de envío, antes */
+                    await handleSubmit(values) /* de resetear el formulario */
+
+                    resetForm() /* Una vez que cumpla con todo el proceso de envío de los datos, resetea el formulario */
+                }}
 
                 validationSchema={nuevoClienteSchema}
             >

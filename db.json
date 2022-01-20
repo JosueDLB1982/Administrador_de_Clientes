@@ -7,6 +7,14 @@
       "empresa": "Spartan DEV",
       "notas": "Developer Treinee",
       "id": 1
+    },
+    {
+      "nombre": "Maykel Cepeda",
+      "telefono": "939091552",
+      "email": "cepedagm14@gmail.com",
+      "empresa": "Spartan DEV",
+      "notas": "Muy pedante",
+      "id": 2
     }
   ]
 }
