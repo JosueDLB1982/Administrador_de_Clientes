@@ -1,14 +1,60 @@
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 const VerCliente = () => {
-    const id = useParams()
+    const [cliente, setCliente] = useState({})
 
-    console.log(id)
+    const { nombre, telefono, email, empresa, notas } = cliente
+
+    const { id } = useParams()
+
+    useEffect(() => {
+        const obtenerClienteAPI = async () => {
+            try {
+                const url = `http://localhost:4000/clientes/${id}`
+                const respuesta = await fetch(url)
+                const resultado = await respuesta.json()
+                setCliente(resultado)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        obtenerClienteAPI()
+    }, [])
 
     return (
         <div>
-            <h1>VerCliente.jsx</h1>
+            <h1 className="font-black text-6xl text-blue-900 m-2">Detalle de Cliente</h1>
+            <p className="m-3 text-xl">{`Información Detallada del Cliente ${nombre}`}</p>
 
+            <p className="text-4xl p-2">
+                <span className="uppercase font-bold">Nombre: </span>
+                <span className="text-gray-900 ">{nombre}</span>
+            </p>
+
+            {telefono && (
+                <p className="text-2xl p-2">
+                <span className="uppercase font-bold">Teléfono: </span>
+                <span className="text-gray-900 ">{telefono}</span>
+            </p>
+            )}
+
+            <p className="text-2xl p-2">
+                <span className="uppercase font-bold">email: </span>
+                <span className="text-gray-900 ">{email}</span>
+            </p>
+
+            <p className="text-2xl p-2">
+                <span className="uppercase font-bold">Empresa: </span>
+                <span className="text-gray-900 ">{empresa}</span>
+            </p>
+
+            {notas && (
+                <p className="text-2xl p-2">
+                <span className="uppercase font-bold">Notas: </span>
+                <span className="text-gray-900 ">{notas}</span>
+            </p>
+            )}
         </div>
     )
 }

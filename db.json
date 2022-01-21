@@ -23,6 +23,38 @@
       "empresa": "Spartan DEV",
       "notas": "Cabezón",
       "id": 3
+    },
+    {
+      "nombre": "Evelin Vargas",
+      "telefono": "971354321",
+      "email": "evelin@correo.com",
+      "empresa": "Spartan DEV",
+      "notas": "",
+      "id": 4
+    },
+    {
+      "nombre": "Caleb Lopez",
+      "telefono": "",
+      "email": "josuejk78@hotmail.com",
+      "empresa": "Spartan DEV",
+      "notas": "Hijo Amado",
+      "id": 5
+    },
+    {
+      "nombre": "Heli Rosales",
+      "telefono": "",
+      "email": "helirosales@gmail.com",
+      "empresa": "Spartan DEV",
+      "notas": "Caballero de la lira",
+      "id": 6
+    },
+    {
+      "nombre": "Hugo Gil",
+      "telefono": "934871398",
+      "email": "hugogil@gmail.com",
+      "empresa": "Spartan DEV",
+      "notas": "",
+      "id": 7
     }
   ]
 }

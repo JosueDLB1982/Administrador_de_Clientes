@@ -10,14 +10,15 @@ const Cliente = ({cliente}) => {
             <td className="p-3 text-center font-bold">{nombre}</td>
             <td className="p-3">
                 <p><span className="text-gray-800 uppercase font-bold">Email: </span>{email}</p>
-                <p><span className="text-gray-800 uppercase font-bold">Tel: </span>{telefono}</p>
+                {telefono && (<p><span className="text-gray-800 uppercase font-bold">Tel: </span>{telefono}</p>)}
+                
             </td>
             <td className="p-3">{empresa}</td>
             <td className="p-3">
                 <button
                     type="button"
                     className="bg-purple-600 hover:bg-purple-900 block w-full text-white p-2 rounded-md uppercase font-bold text-xs m-2"
-                    onClick={() => navigate(`/clientes/${id} ${nombre}`)}
+                    onClick={() => navigate(`/clientes/${id}`)}
                 >
                     Ver
                 </button>
