@@ -15,6 +15,14 @@
       "empresa": "Spartan DEV",
       "notas": "Muy pedante",
       "id": 2
+    },
+    {
+      "nombre": "Oliver Prada",
+      "telefono": "985673245",
+      "email": "oliverprada86@gmail.com",
+      "empresa": "Spartan DEV",
+      "notas": "Cabezón",
+      "id": 3
     }
   ]
 }
