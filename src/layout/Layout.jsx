@@ -8,17 +8,18 @@ const Layout = () => {
         <div className="md:flex md:min-h-screen">
             <div className="md:w-1/4 bg-blue-900 px-5 py-10">
                 <h2 className="text-4xl font-black text-center text-white">CRM - Clientes</h2>
+                <h3 className="text-center text-gray-500 hover:text-green-500"><a href="https://github.com/JosueDLB1982" target='blanck'>Josue Lopez - Developer Treinee</a></h3>
 
                 <nav className="mt-10">
                     <Link
-                        className={`${urlActual === '/clientes' ? 'text-blue-300 text-3xl' : 'text-white'}  text-2xl block mt-2 hover:text-blue-300`}
+                        className={`${urlActual === '/clientes' ? 'text-blue-300 text-3xl' : 'text-white'}  text-2xl block mt-2 hover:text-blue-400`}
                         to="/clientes"
                     >
                         Clientes
                     </Link>
 
                     <Link
-                        className={`${urlActual === '/clientes/nuevo' ? 'text-blue-300 text-3xl' : 'text-white'}  text-2xl block mt-2 hover:text-blue-300`}
+                        className={`${urlActual === '/clientes/nuevo' ? 'text-blue-300 text-3xl' : 'text-white'}  text-2xl block mt-2 hover:text-blue-400`}
                         to="/clientes/nuevo"
                     >
                         Nuevo Cliente
@@ -26,7 +27,7 @@ const Layout = () => {
                 </nav>
             </div>
 
-            <div className="md:w-3/4 p-10 md:h-screen overflow-scroll">
+            <div className="md:w-3/4 p-10 md:h-screen overflow-scroll   ">
                 <Outlet />
             </div>
         </div>
