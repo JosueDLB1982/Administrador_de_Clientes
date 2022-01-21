@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
+import Spinner from "../components/Spinner"
 import { useParams } from "react-router-dom"
 
 const VerCliente = () => {
     const [cliente, setCliente] = useState({})
 
-    const [cargando, setCargando] = useState(false)
+    const [cargando, setCargando] = useState(true)
 
     const { nombre, telefono, email, empresa, notas } = cliente
 
     const { id } = useParams()
 
     useEffect(() => {
-        setCargando(!cargando)
         const obtenerClienteAPI = async () => {
             try {
                 const url = `http://localhost:4000/clientes/${id}`
@@ -21,17 +21,17 @@ const VerCliente = () => {
             } catch (error) {
                 console.log(error)
             }
-            setCargando(false)
+            setCargando(!cargando)
         }
         obtenerClienteAPI()
     }, [])
 
     return (
-        Object.keys(cliente).length === 0 ? <p className="font-black text-6xl text-blue-900 m-2">El Cliente no Existe</p> : ( /* Con el proposito de verificar si el usuario introduce una direccion id de cliente inexistente, mostrar mensaje alusivo */
-
-            <div>
-                {cargando ? 'Cargando...' : (
-                    <>
+        cargando ? <Spinner /> :
+            Object.keys(cliente).length === 0 ? /* Con el proposito de verificar si el usuario introduce una direccion id de cliente inexistente, mostrar mensaje alusivo */
+                <p className="font-black text-6xl text-blue-900 m-2">El Cliente no Existe</p> :
+                (
+                    <div>
                         <h1 className="font-black text-6xl text-blue-900 m-2">Detalle de Cliente</h1>
                         <p className="m-3 text-xl">{`Información Detallada del Cliente ${nombre}`}</p>
 
@@ -63,10 +63,8 @@ const VerCliente = () => {
                                 <span className="text-gray-900 ">{notas}</span>
                             </p>
                         )}
-                    </>
-                )}
-            </div>
-        )
+                    </div>
+                )
     )
 }
 
