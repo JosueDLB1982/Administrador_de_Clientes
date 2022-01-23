@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import Alerta from "./Alerta"
 
 const Formulario = ({cliente}) => {
+    
     const navigate = useNavigate() /* Función para redirigir a otra pagina */
 
     const phoneExpReg = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
@@ -55,13 +56,14 @@ const Formulario = ({cliente}) => {
             <h1 className="text-gray-600 font-bold text-xl uppercase text-center">Agregar Cliente</h1>
 
             <Formik
-                initialValues={{
-                    nombre: '',
-                    telefono: '',
-                    email: '',
-                    empresa: '',
-                    notas: ''
+                initialValues={{ /* Para efectos de la edicion revisa si existen los contenidos de los campos, si no existen, los inicia vacíos */
+                    nombre: cliente?.nombre ?? '',
+                    telefono: cliente?.telefono ?? '',
+                    email: cliente?.email ?? '',
+                    empresa: cliente?.empresa ?? '',
+                    notas: cliente?.notas ?? ''
                 }}
+                enableReinitialize={true} /* Para efectos de la edición, cuando es nuevo, reinicia los valores a vacío */
 
                 onSubmit={ async (values, {resetForm}) => { /* Añadimos el async await para asegurarnos que se complete la petición de envío, antes */
                     await handleSubmit(values) /* de resetear el formulario */
