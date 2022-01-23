@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import * as Yup from 'yup'
 import Alerta from "./Alerta"
 
-const Formulario = () => {
+const Formulario = ({cliente}) => {
     const navigate = useNavigate() /* Función para redirigir a otra pagina */
 
     const phoneExpReg = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/
