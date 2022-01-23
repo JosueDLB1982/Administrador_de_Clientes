@@ -30,18 +30,32 @@ const Formulario = ({ cliente, cargando }) => {
 
     const handleSubmit = async (val) => { /* la llamada es async asincrona */
         try {
-            const url = 'http://localhost:4000/clientes' /* Aquí se enviará la petición. Esta es la dirección y puerto escogidos para la Rest API */
-            const respuesta = await fetch(url, { /* Puesto que se hará un registro, envio de información, se pasan mas datos ademas de la url */
-                method: 'POST',  /* Hay que enviar los datos, se usa por eso el method post y se pasa el object con los datos, el object incluye */
-                body: JSON.stringify(val), /* el method post segun las reglas de Rest es para crear un registro. En body se guardará un object, este */
-                headers: { /* debe ser convertido a string con JSON.stringify. Por último, uno de los valores del object, es otro object, headers, */
-                    'Content-Type': 'application/json' /* ahí declaramos que el tipo de contenido es una app para JSON */
-                }
-            })
+            let respuesta
 
-            console.log(respuesta)
-            const resultado = await respuesta.json() /* pasamos el resultado a formato JSON */
-            console.log(resultado)
+            if (cliente.id) {
+                /* Editando registro de cliente */
+                const url = `http://localhost:4000/clientes/${cliente.id}` /* Aquí se enviará la petición. Esta es la dirección y puerto escogidos para la Rest API y como es una edicion se usa method PUT y a la url se añade el id*/
+                respuesta = await fetch(url, { /* Puesto que se hará un registro, envio de información, se pasan mas datos ademas de la url */
+                    method: 'PUT',  /* Hay que enviar los datos, se usa por eso el method post y se pasa el object con los datos, el object incluye */
+                    body: JSON.stringify(val), /* el method post segun las reglas de Rest es para crear un registro. En body se guardará un object, este */
+                    headers: { /* debe ser convertido a string con JSON.stringify. Por último, uno de los valores del object, es otro object, headers, */
+                        'Content-Type': 'application/json' /* ahí declaramos que el tipo de contenido es una app para JSON */
+                    }
+                })
+
+            } else {
+                /* Nuevo registro de cliente */
+                const url = 'http://localhost:4000/clientes' /* Aquí se enviará la petición. Esta es la dirección y puerto escogidos para la Rest API */
+                respuesta = await fetch(url, { /* Puesto que se hará un registro, envio de información, se pasan mas datos ademas de la url */
+                    method: 'POST',  /* Hay que enviar los datos, se usa por eso el method post y se pasa el object con los datos, el object incluye */
+                    body: JSON.stringify(val), /* el method post segun las reglas de Rest es para crear un registro. En body se guardará un object, este */
+                    headers: { /* debe ser convertido a string con JSON.stringify. Por último, uno de los valores del object, es otro object, headers, */
+                        'Content-Type': 'application/json' /* ahí declaramos que el tipo de contenido es una app para JSON */
+                    }
+                })
+            }
+
+            await respuesta.json() /* pasamos el resultado a formato JSON */
             navigate('/clientes') /* A esta dirección queremos redirigir al usuario una vez que complete un registro */
 
         } catch (error) {
