@@ -8,7 +8,7 @@ const EditarCliente = () => {
 
     const [cargando, setCargando] = useState(true)
 
-    const { nombre, telefono, email, empresa, notas } = cliente
+    const { nombre } = cliente
 
     const { id } = useParams()
 
@@ -28,12 +28,15 @@ const EditarCliente = () => {
     }, [])
     
     return (
+        Object.keys(cliente).length === 0 ? /* Con el proposito de verificar si el usuario introduce una direccion id de cliente inexistente, mostrar mensaje alusivo */
+                <p className="font-black text-6xl text-blue-900 m-2">El Registro Solicitado no Existe</p> :
         <>
             <h1 className="font-black text-4xl text-blue-900 m">Editar Cliente</h1>
             <p className="mt-3">{`Revisa los Siguientes Campos Para Editar el registro del Cliente ${nombre}`}</p>
 
             <Formulario
                 cliente={cliente}
+                cargando={cargando}
             />
 
         </>
