@@ -34,7 +34,7 @@ const Formulario = ({ cliente, cargando }) => {
 
             if (cliente.id) {
                 /* Editando registro de cliente */
-                const url = `http://localhost:4000/clientes/${cliente.id}` /* Aquí se enviará la petición. Esta es la dirección y puerto escogidos para la Rest API y como es una edicion se usa method PUT y a la url se añade el id*/
+                const url = `${import.meta.env.VITE_API_URL}/${cliente.id}` /* Aquí se enviará la petición. Esta es la dirección y puerto escogidos para la Rest API y como es una edicion se usa method PUT y a la url se añade el id*/
                 respuesta = await fetch(url, { /* Puesto que se hará un registro, envio de información, se pasan mas datos ademas de la url */
                     method: 'PUT',  /* Hay que enviar los datos, se usa por eso el method post y se pasa el object con los datos, el object incluye */
                     body: JSON.stringify(val), /* el method post segun las reglas de Rest es para crear un registro. En body se guardará un object, este */
@@ -45,7 +45,7 @@ const Formulario = ({ cliente, cargando }) => {
 
             } else {
                 /* Nuevo registro de cliente */
-                const url = 'http://localhost:4000/clientes' /* Aquí se enviará la petición. Esta es la dirección y puerto escogidos para la Rest API */
+                const url = import.meta.env.VITE_API_URL /* Aquí se enviará la petición. Esta es la dirección y puerto escogidos para la Rest API */
                 respuesta = await fetch(url, { /* Puesto que se hará un registro, envio de información, se pasan mas datos ademas de la url */
                     method: 'POST',  /* Hay que enviar los datos, se usa por eso el method post y se pasa el object con los datos, el object incluye */
                     body: JSON.stringify(val), /* el method post segun las reglas de Rest es para crear un registro. En body se guardará un object, este */

@@ -7,7 +7,7 @@ const Inicio = () => {
     useEffect(() => {
         const obtenerClientesAPI = async () => {
             try {
-                const url = 'http://localhost:4000/clientes' /* Con esto vamos a obtener los clientes de la API */
+                const url = import.meta.env.VITE_API_URL /* Con esto vamos a obtener los clientes de la API */
                 const respuesta = await fetch(url) /* Puesto que es una petición GET sólo requiere la url */
                 const resultado = await respuesta.json()
                 setClientes(resultado)
@@ -22,7 +22,7 @@ const Inicio = () => {
         const confirmar = confirm(`¿Está seguro de querer eliminar el registro del cliente ${nombre}`)
         if(confirmar) {
             try {
-                const url = `http://localhost:4000/clientes/${id}` /* Identifico el registro a eliminar por su id */
+                const url = `${import.meta.env.VITE_API_URL}/${id}` /* Identifico el registro a eliminar por su id */
                 const respuesta = await fetch(url, {
                     method: 'DELETE' /* Uso el method DELETE */
                 })

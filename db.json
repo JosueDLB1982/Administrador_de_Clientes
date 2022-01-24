@@ -47,14 +47,6 @@
       "empresa": "Spartan DEV",
       "notas": "Caballero de la lira",
       "id": 6
-    },
-    {
-      "nombre": "Hugo Gil",
-      "telefono": "934871398",
-      "email": "hugogil@gmail.com",
-      "empresa": "Spartan DEV",
-      "notas": "",
-      "id": 7
     }
   ]
 }
