@@ -18,6 +18,24 @@ const Inicio = () => {
         obtenerClientesAPI()
     }, [])
 
+    const handleEliminar = async ({id, nombre}) => {
+        const confirmar = confirm(`¿Está seguro de querer eliminar el registro del cliente ${nombre}`)
+        if(confirmar) {
+            try {
+                const url = `http://localhost:4000/clientes/${id}` /* Identifico el registro a eliminar por su id */
+                const respuesta = await fetch(url, {
+                    method: 'DELETE' /* Uso el method DELETE */
+                })
+                await respuesta.json() 
+
+                const arrayClientes = clientes.filter(cliente => cliente.id !== id) /* filtro los clientes por id */
+                setClientes(arrayClientes) /* Devuelvo el state actualizado */
+            } catch (error) {
+                
+            }
+        }
+    }
+
     return (
         <>
             <h1 className="font-black text-4xl text-blue-900 m">Clientes</h1>
@@ -38,6 +56,7 @@ const Inicio = () => {
                         <Cliente
                             key={cliente.id}
                             cliente={cliente}
+                            handleEliminar={handleEliminar}
                         />
                     ))}
                 </tbody>
