@@ -29,7 +29,7 @@ const VerCliente = () => {
     return (
         cargando ? <Spinner /> :
             Object.keys(cliente).length === 0 ? /* Con el proposito de verificar si el usuario introduce una direccion id de cliente inexistente, mostrar mensaje alusivo */
-                <p className="font-black text-6xl text-blue-900 m-2">El Cliente no Existe</p> :
+                <p className="font-black text-6xl text-blue-900 m-2">El Cliente Solicitado no Existe</p> :
                 (
                     <div>
                         <h1 className="font-black text-6xl text-blue-900 m-2">Detalle de Cliente</h1>
